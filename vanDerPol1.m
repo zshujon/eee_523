@@ -1,19 +1,17 @@
 clc, clear all; close all;
-
-t_i = 0;
-t_f = 100;
-tspan = [t_i, t_f];
+tspan = [0, 20];
 x0 = [2, 0];
-mu = 18;
+mu = 0.18;
 ode = @(t,x) vanderpoldemo(t,x,mu);
 [t,y] = ode45(ode, tspan, x0);
-y_max = max(y(:,1));
-y_min = min(y(:,1));
 %[t, y] = ode45(@vanDerPolSim, tspan, x0);
 
 for i = 1:length(t)
-    plot(t(i), y(i)),
-    axis([t_i t_f 1.5*y_min 1.5*y_max+1])
+    figure(1), plot(t(i), y(i,1)),
+    axis([0 20 -20 20])
     hold on
-    pause(.00001)
+    figure(2), plot(t(i), y(i,2), 'm')
+    axis([0 20.5 -20 20])
+    hold on
+    pause(.0001)
 end
